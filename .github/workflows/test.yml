@@ -10,5 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install docker
+        run: curl -fsSL https://get.docker.com | sh -
       - name: Run test
         run: ./test.sh --docker
