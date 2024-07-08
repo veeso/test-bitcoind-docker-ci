@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOCKER="$1"
+
 setup_docker() {
     set -e
     PREV_PATH=$(pwd)
@@ -16,7 +18,9 @@ stop_docker() {
     cd $PREV_PATH
 }
 
-setup_docker
+if [ "$DOCKER" == "--docker" ]; then
+  setup_docker
+fi
 
 BTC_ENDPOINT_READY=255
 BTC_ENDPOINT_ELAPSED=0
@@ -35,4 +39,6 @@ while [ "$BTC_ENDPOINT_READY" -ne 0 ]; do
   fi
 done
 
-stop_docker
+if [ "$DOCKER" == "--docker" ]; then
+  stop_docker
+fi
